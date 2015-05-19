@@ -1,4 +1,4 @@
-package com.ricardofaria.api;
+package com.rf.api;
 
 public class NotFoundException extends ApiException {
 	private int code;

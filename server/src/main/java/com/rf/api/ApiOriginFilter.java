@@ -1,4 +1,4 @@
-package com.ricardofaria.api;
+package com.rf.api;
 
 import java.io.IOException;
 

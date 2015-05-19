@@ -1,4 +1,4 @@
-package com.ricardofaria.api;
+package com.rf.api;
 
 public class ApiException extends Exception{
 	private int code;

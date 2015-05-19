@@ -1,8 +1,7 @@
-package com.ricardofaria.api;
+package com.rf.api;
 
-import com.ricardofaria.api.NotFoundException;
-import com.ricardofaria.model.*;
-import com.wordnik.swagger.annotations.*;
+import com.rf.api.NotFoundException;
+import com.rf.restserver.data.jpa.domain.*;
 
 import java.util.List;
 
@@ -10,11 +9,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
 @Path("/users")
-@Api(value = "/users", description = "the users API")
+//@Api(value = "/users", description = "the users API")
 @Produces({"application/json"})
 public class UsersApi {
   
-  @GET
+  /*@GET
   @Path("/")
   @ApiOperation(value = "Loads a list of User", notes = "Loads a list of User", response = User.class, responseContainer = "List")
   @ApiResponses(value = { 
@@ -81,7 +80,7 @@ public class UsersApi {
       throws NotFoundException {
       // do some magic!
       return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
-  }
+  }*/
 
   
 }
