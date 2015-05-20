@@ -1,4 +1,4 @@
-package com.rf.api;
+package com.rf.rest.api;
 
 import java.io.IOException;
 

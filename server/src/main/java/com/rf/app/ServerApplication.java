@@ -1,4 +1,4 @@
-package com.rf.restserver.data.jpa;
+package com.rf.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

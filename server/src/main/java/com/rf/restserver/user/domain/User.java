@@ -1,4 +1,4 @@
-package com.rf.restserver.data.jpa.domain;
+package com.rf.restserver.user.domain;
 
 public class User {
 	/**

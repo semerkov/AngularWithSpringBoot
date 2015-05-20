@@ -1,4 +1,4 @@
-package com.rf.api;
+package com.rf.rest.api;
 
 public class NotFoundException extends ApiException {
 	private int code;
