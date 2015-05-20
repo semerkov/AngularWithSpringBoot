@@ -4,9 +4,9 @@ A barebone AngularJS project for the SDK
 Folder structure
 ----------------------------
 
-- `index.html `: should fetch the `app.js` and `UserswebapiModule.js`
+- `index.html `: should fetch the `app.js` and `usersModule.js`
 - `app.js `: should use the module `'UserswebapiModule'`
-- `UserswebapiModule.js `: your SDK
+- `usersModule.js `: your SDK
 
 Usage instructions
 ----------------------------

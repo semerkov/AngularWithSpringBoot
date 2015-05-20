@@ -1,11 +1,11 @@
 /*jshint -W069 */
 /*global angular:false */
-angular.module('UserswebapiModule', [])
+angular.module('UserswebapiModule')
     .factory('UserswebapiClientResource', ['$q', '$http', '$rootScope', function($q, $http, $rootScope) {
         'use strict';
 
         /**
-         * 
+         *
          * @class UserswebapiClientResource
          * @param {(string|object)} [domainOrOptions] - The project domain or options object. If object, see the object's optional properties.
          * @param {string} [domainOrOptions.domain] - The project domain
@@ -82,7 +82,7 @@ angular.module('UserswebapiModule', [])
              * @param {string} $sort - Order in which to retrieve the results. Mutliple sort criteria can be passed. Example: sort=age ASC,height DESC
              * @param {string} $page - Number of the page to retrieve. Integer value.
              * @param {string} name - Allows to filter the collections of result by the value of field name
-             * 
+             *
              */
             UserswebapiClientResource.prototype.getUserList = function(parameters) {
                 if (parameters === undefined) {
@@ -179,8 +179,8 @@ angular.module('UserswebapiModule', [])
              * Adds a User
              * @method
              * @name UserswebapiClientResource#postUserList
-             * @param {} body - 
-             * 
+             * @param {} body -
+             *
              */
             UserswebapiClientResource.prototype.postUserList = function(parameters) {
                 if (parameters === undefined) {
@@ -245,7 +245,7 @@ angular.module('UserswebapiModule', [])
              * @method
              * @name UserswebapiClientResource#getUser
              * @param {string} userid - Identifier of the User
-             * 
+             *
              */
             UserswebapiClientResource.prototype.getUser = function(parameters) {
                 if (parameters === undefined) {
@@ -318,8 +318,8 @@ angular.module('UserswebapiModule', [])
              * @method
              * @name UserswebapiClientResource#putUser
              * @param {string} userid - Identifier of the User
-             * @param {} body - 
-             * 
+             * @param {} body -
+             *
              */
             UserswebapiClientResource.prototype.putUser = function(parameters) {
                 if (parameters === undefined) {
@@ -391,7 +391,7 @@ angular.module('UserswebapiModule', [])
              * @method
              * @name UserswebapiClientResource#deleteUser
              * @param {string} userid - Identifier of the User
-             * 
+             *
              */
             UserswebapiClientResource.prototype.deleteUser = function(parameters) {
                 if (parameters === undefined) {

@@ -24,23 +24,23 @@
 <![endif]-->
 
 
-<div class="container">
-	<form class="form-horizontal">
-
-		<h1>userswebapi API</h1>
-
-		<h2>Endpoint</h2>
-		<div class="form-group">
-
-			<div class="col-xs-3">Base URI:</div>
-			<div class="col-xs-5 form-container-input">
-				<span>{{uri}}</span>
+<!-- HEADER AND NAVBAR -->
+<header>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Angular Example</a>
 			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="#user"><i class="fa fa-shield"></i> User</a></li>
+			</ul>
 		</div>
-		
-		Do some magic !
-		
-	</form>
+	</nav>
+</header>
+
+<div class="container">
   
 </div>
 
@@ -57,7 +57,9 @@
 <script src="bower_components/lodash/lodash.min.js"></script>
 <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
 
-<script src="UserswebapiModule.js"></script>
+<script src="app/users/usersModule.js"></script>
+<script src="app/users/factory.js"></script>
+<script src="app/users/cadUserCtrl.js"></script>
 <script src="app.js"></script>
 
 </body>
