@@ -12,7 +12,7 @@ angular.module('apiClient', ['ui.bootstrap', 'ngAnimate', 'UserswebapiModule'])
 
 .controller('MainCtrl', function ($scope, $http, $q, $location, $timeout, $window, UserswebapiClientResource) {
 
-	$scope.uri = 'https://userswebapi.apispark.net/v1';
+	$scope.uri = 'http://localhost:8080/';
 	var userswebapiClientResource = new UserswebapiClientResource($scope.uri);
 	
 	// Do some magic !
