@@ -178,11 +178,11 @@ angular.module('app.usersModule')
             /**
              * Adds a User
              * @method
-             * @name UsersModule#postUserList
+             * @name UsersModule#postUser
              * @param {} body -
              *
              */
-            UsersModule.prototype.postUserList = function(parameters) {
+            UsersModule.prototype.postUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }

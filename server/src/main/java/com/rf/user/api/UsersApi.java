@@ -26,16 +26,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rf.rest.apiutils.ApiResponseMessage;
 import com.rf.rest.apiutils.NotFoundException;
+import com.rf.user.business.UserBusiness;
 import com.rf.user.domain.User;
 
 @Component
 @Path("/users")
 @Produces({ "application/json" })
 public class UsersApi {
+	
+	@Autowired
+	private UserBusiness userBusiness;
 
 	@GET
 	@Path("/")
@@ -56,13 +61,20 @@ public class UsersApi {
 
 	@POST
 	@Path("/")
-	public Response postUserList(User body)
+	public Response postUserList(User user)
 			throws NotFoundException {
-		// do some magic!
-		return Response
-				.ok()
-				.entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!"))
-				.build();
+		boolean saveResult = userBusiness.saveUser(user);
+		if (saveResult) {
+			return Response
+					.ok()
+					.entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!"))
+					.build();			
+		} else {
+			return Response
+					.serverError()
+					.entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user"))
+					.build();	
+		}
 	}
 
 	@GET

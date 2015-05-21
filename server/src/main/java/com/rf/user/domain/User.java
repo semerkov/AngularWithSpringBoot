@@ -1,28 +1,27 @@
 package com.rf.user.domain;
 
-public class User {
-	/**
-	 * Auto-generated primary key field
-	 **/
-	private String id = null;
-	/**
-   **/
-	private String name = null;
-	/**
-   **/
-	private String login = null;
-	/**
-   **/
-	private String email = null;
-	/**
-   **/
-	private String password = null;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	public String getId() {
+@Entity(name = "auser")
+public class User {
+	@Id
+	private Long id;
+	@Column(length = 100, nullable = false)
+	private String name;
+	@Column(length = 50, nullable = false)
+	private String login;
+	@Column(length = 100, nullable = false)
+	private String email;
+	@Column(length = 100, nullable = false)
+	private String password;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
