@@ -1,20 +1,20 @@
 /*jshint -W069 */
 /*global angular:false */
-angular.module('UserswebapiModule')
-    .factory('UserswebapiClientResource', ['$q', '$http', '$rootScope', function($q, $http, $rootScope) {
+angular.module('app.usersModule')
+    .factory('UsersModuleResource', ['$q', '$http', '$rootScope', function($q, $http, $rootScope) {
         'use strict';
 
         /**
          *
-         * @class UserswebapiClientResource
+         * @class UsersModule
          * @param {(string|object)} [domainOrOptions] - The project domain or options object. If object, see the object's optional properties.
          * @param {string} [domainOrOptions.domain] - The project domain
          * @param {string} [domainOrOptions.cache] - An angularjs cache implementation
          * @param {object} [domainOrOptions.token] - auth token - object with value property and optional headerOrQueryName and isQuery properties
          * @param {string} [cache] - An angularjs cache implementation
          */
-        var UserswebapiClientResource = (function() {
-            function UserswebapiClientResource(options, cache) {
+        var UsersModule = (function() {
+            function UsersModule(options, cache) {
                 var domain = (typeof options === 'object') ? options.domain : options;
                 this.domain = typeof(domain) === 'string' ? domain : 'https://userswebapi.apispark.net/v1';
                 if (this.domain.length === 0) {
@@ -25,7 +25,7 @@ angular.module('UserswebapiModule')
                 this.token = (typeof options === 'object') ? (options.token ? options.token : {}) : {};
             }
 
-            UserswebapiClientResource.prototype.$on = function($scope, path, handler) {
+            UsersModule.prototype.$on = function($scope, path, handler) {
                 var url = domain + path;
                 $scope.$on(url, function() {
                     handler();
@@ -33,14 +33,14 @@ angular.module('UserswebapiModule')
                 return this;
             };
 
-            UserswebapiClientResource.prototype.$broadcast = function(path) {
+            UsersModule.prototype.$broadcast = function(path) {
                 var url = domain + path;
                 //cache.remove(url);
                 $rootScope.$broadcast(url);
                 return this;
             };
 
-            UserswebapiClientResource.transformRequest = function(obj) {
+            UsersModule.transformRequest = function(obj) {
                 var str = [];
                 for (var p in obj) {
                     var val = obj[p];
@@ -58,13 +58,13 @@ angular.module('UserswebapiModule')
             /**
              * Set Token
              * @method
-             * @name UserswebapiClientResource#setToken
+             * @name UsersModule#setToken
              * @param {string} value - token's value
              * @param {string} headerOrQueryName - the header or query name to send the token at
              * @param {boolean} isQuery - true if send the token as query param, otherwise, send as header param
              *
              */
-            UserswebapiClientResource.prototype.setToken = function(value, headerOrQueryName, isQuery) {
+            UsersModule.prototype.setToken = function(value, headerOrQueryName, isQuery) {
                 this.token.value = value;
                 this.token.headerOrQueryName = headerOrQueryName;
                 this.token.isQuery = isQuery;
@@ -73,7 +73,7 @@ angular.module('UserswebapiModule')
             /**
              * Loads a list of User
              * @method
-             * @name UserswebapiClientResource#getUserList
+             * @name UsersModule#getUserList
              * @param {string} email - Allows to filter the collections of result by the value of field email
              * @param {string} id - Allows to filter the collections of result by the value of field id
              * @param {string} password - Allows to filter the collections of result by the value of field password
@@ -84,7 +84,7 @@ angular.module('UserswebapiModule')
              * @param {string} name - Allows to filter the collections of result by the value of field name
              *
              */
-            UserswebapiClientResource.prototype.getUserList = function(parameters) {
+            UsersModule.prototype.getUserList = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
@@ -155,7 +155,7 @@ angular.module('UserswebapiModule')
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UserswebapiClientResource.transformRequest;
+                    options.transformRequest = UsersModule.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
@@ -178,11 +178,11 @@ angular.module('UserswebapiModule')
             /**
              * Adds a User
              * @method
-             * @name UserswebapiClientResource#postUserList
+             * @name UsersModule#postUserList
              * @param {} body -
              *
              */
-            UserswebapiClientResource.prototype.postUserList = function(parameters) {
+            UsersModule.prototype.postUserList = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
@@ -220,7 +220,7 @@ angular.module('UserswebapiModule')
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UserswebapiClientResource.transformRequest;
+                    options.transformRequest = UsersModule.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
@@ -243,11 +243,11 @@ angular.module('UserswebapiModule')
             /**
              * Loads a User
              * @method
-             * @name UserswebapiClientResource#getUser
+             * @name UsersModule#getUser
              * @param {string} userid - Identifier of the User
              *
              */
-            UserswebapiClientResource.prototype.getUser = function(parameters) {
+            UsersModule.prototype.getUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
@@ -293,7 +293,7 @@ angular.module('UserswebapiModule')
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UserswebapiClientResource.transformRequest;
+                    options.transformRequest = UsersModule.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
@@ -316,12 +316,12 @@ angular.module('UserswebapiModule')
             /**
              * Stores a User
              * @method
-             * @name UserswebapiClientResource#putUser
+             * @name UsersModule#putUser
              * @param {string} userid - Identifier of the User
              * @param {} body -
              *
              */
-            UserswebapiClientResource.prototype.putUser = function(parameters) {
+            UsersModule.prototype.putUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
@@ -366,7 +366,7 @@ angular.module('UserswebapiModule')
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UserswebapiClientResource.transformRequest;
+                    options.transformRequest = UsersModule.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
@@ -389,11 +389,11 @@ angular.module('UserswebapiModule')
             /**
              * Deletes a User
              * @method
-             * @name UserswebapiClientResource#deleteUser
+             * @name UsersModule#deleteUser
              * @param {string} userid - Identifier of the User
              *
              */
-            UserswebapiClientResource.prototype.deleteUser = function(parameters) {
+            UsersModule.prototype.deleteUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
@@ -434,7 +434,7 @@ angular.module('UserswebapiModule')
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UserswebapiClientResource.transformRequest;
+                    options.transformRequest = UsersModule.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
@@ -455,8 +455,8 @@ angular.module('UserswebapiModule')
                 return deferred.promise;
             };
 
-            return UserswebapiClientResource;
+            return UsersModule;
         })();
 
-        return UserswebapiClientResource;
+        return UsersModule;
     }]);
