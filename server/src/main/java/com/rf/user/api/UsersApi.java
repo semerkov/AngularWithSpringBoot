@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.rf.restserver.user.api;
+package com.rf.user.api;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,9 +28,9 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Component;
 
-import com.rf.rest.api.ApiResponseMessage;
-import com.rf.rest.api.NotFoundException;
-import com.rf.restserver.user.domain.User;
+import com.rf.rest.apiutils.ApiResponseMessage;
+import com.rf.rest.apiutils.NotFoundException;
+import com.rf.user.domain.User;
 
 @Component
 @Path("/users")
@@ -80,7 +80,7 @@ public class UsersApi {
 	@PUT
 	@Path("/{userid}")
 	public Response putUser(
-			@PathParam("userid") String userid, User body) throws NotFoundException {
+			@PathParam("userid") String userid, User user) throws NotFoundException {
 		// do some magic!
 		return Response
 				.ok()

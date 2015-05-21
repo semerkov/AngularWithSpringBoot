@@ -1,4 +1,4 @@
-package com.rf.rest.api;
+package com.rf.rest.apiutils;
 
 public class ApiException extends Exception {
 	private int code;

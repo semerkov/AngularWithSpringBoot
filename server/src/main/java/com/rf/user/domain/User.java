@@ -1,4 +1,4 @@
-package com.rf.restserver.user.domain;
+package com.rf.user.domain;
 
 public class User {
 	/**
