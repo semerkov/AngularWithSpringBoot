@@ -15,6 +15,7 @@
  */
 package com.rf.restserver.data.jpa.service;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ import static org.junit.Assert.assertThat;
  * 
  * @author Oliver Gierke
  */
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ServerApplication.class)
 public class CityRepositoryIntegrationTests {

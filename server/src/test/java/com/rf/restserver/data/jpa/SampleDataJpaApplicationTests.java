@@ -1,6 +1,7 @@
 package com.rf.restserver.data.jpa;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = ServerApplication.class)
 @WebAppConfiguration
 @ActiveProfiles("scratch")
+@Ignore
 // Separate profile for web tests to avoid clashing databases
 public class SampleDataJpaApplicationTests {
 
