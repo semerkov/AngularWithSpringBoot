@@ -1,4 +1,4 @@
-package com.rf.app;
+package com.rf;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;

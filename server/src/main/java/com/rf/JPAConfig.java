@@ -1,4 +1,4 @@
-package com.rf.app;
+package com.rf;
 
 import javax.persistence.EntityManagerFactory;
 
