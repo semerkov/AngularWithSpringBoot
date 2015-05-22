@@ -17,6 +17,19 @@ public class User {
 	@Column(length = 100, nullable = false)
 	private String password;
 
+	public User() {
+		super();
+	}
+	
+	public User(Long id, String name, String login, String email, String password) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.login = login;
+		this.email = email;
+		this.password = password;
+	}
+	
 	public Long getId() {
 		return id;
 	}

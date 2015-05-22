@@ -11,7 +11,7 @@ public class UserBusiness {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	public UserBusiness(UserRepository userRepository) {
 		super();
@@ -19,11 +19,29 @@ public class UserBusiness {
 	}
 
 	public boolean saveUser(User user) {
-		user = userRepository.save(user);
+		userRepository.save(user);
 		if (user.getId() > 0) {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean existsUsers() {
+		int countResult = userRepository.countUsers();
+		return countResult > 0;
+	}
+
+	public User load(Long userid) {
+		return userRepository.findOne(userid);
+	}
+
+	public Boolean delete(Long userid) {
+		try {
+			userRepository.delete(userid);			
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

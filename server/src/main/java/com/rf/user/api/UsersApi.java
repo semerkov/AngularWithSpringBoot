@@ -1,19 +1,3 @@
-/*
- * Copyright 2012-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.rf.user.api;
 
 import javax.ws.rs.DELETE;
@@ -38,77 +22,50 @@ import com.rf.user.domain.User;
 @Path("/users")
 @Produces({ "application/json" })
 public class UsersApi {
-	
+
 	@Autowired
 	private UserBusiness userBusiness;
 
 	@GET
 	@Path("/")
-	public Response getUserList(@QueryParam("email") String email,
-			@QueryParam("id") String id,
-			@QueryParam("password") String password,
-			@QueryParam("$size") String $size,
-			@QueryParam("login") String login,
-			@QueryParam("$sort") String $sort,
-			@QueryParam("$page") String $page, @QueryParam("name") String name)
-			throws NotFoundException {
+	public Response getUserList(@QueryParam("email") String email, @QueryParam("id") String id, @QueryParam("password") String password,
+			@QueryParam("$size") String $size, @QueryParam("login") String login, @QueryParam("$sort") String $sort,
+			@QueryParam("$page") String $page, @QueryParam("name") String name) throws NotFoundException {
 		// do some magic!
-		return Response
-				.ok()
-				.entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!"))
-				.build();
+		return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
 	}
 
 	@POST
 	@Path("/")
-	public Response postUserList(User user)
-			throws NotFoundException {
+	public Response postUser(User user) throws NotFoundException {
 		boolean saveResult = userBusiness.saveUser(user);
 		if (saveResult) {
-			return Response
-					.ok()
-					.entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!"))
-					.build();			
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!")).build();
 		} else {
-			return Response
-					.serverError()
-					.entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user"))
-					.build();	
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user")).build();
 		}
 	}
 
 	@GET
 	@Path("/{userid}")
-	public Response getUser(
-			@PathParam("userid") String userid)
-			throws NotFoundException {
-		// do some magic!
-		return Response
-				.ok()
-				.entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!"))
-				.build();
+	public User getUser(@PathParam("userid") Long userid) throws NotFoundException {
+		return userBusiness.load(userid);
 	}
 
 	@PUT
 	@Path("/{userid}")
-	public Response putUser(
-			@PathParam("userid") String userid, User user) throws NotFoundException {
-		// do some magic!
-		return Response
-				.ok()
-				.entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!"))
-				.build();
+	public boolean putUser(@PathParam("userid") String userid, User user) throws NotFoundException {
+		return userBusiness.saveUser(user);
 	}
 
 	@DELETE
 	@Path("/{userid}")
-	public Response deleteUser(
-			@PathParam("userid") String userid)
-			throws NotFoundException {
-		// do some magic!
-		return Response
-				.ok()
-				.entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!"))
-				.build();
+	public Response deleteUser(@PathParam("userid") Long userid) throws NotFoundException {
+		boolean result = userBusiness.delete(userid);
+		if (result) {
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "deleted with success!")).build();
+		} else {
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to delete user")).build();
+		}
 	}
 }

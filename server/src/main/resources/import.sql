@@ -1,0 +1,18 @@
+insert into auser(id, name, login, email, password) values (1, 'Admin', 'admin', 'admin@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (2, 'Adam', 'adam', 'adam@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (3, 'Bethany', 'bethany', 'bethany@admin.com','123456');
+insert into auser(id, name, login, email, password) values (4, 'Ciara', 'ciara', 'ciara@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (5, 'Esther', 'esther', 'esther@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (6, 'Amanda', 'amanda', 'amanda@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (7, 'Uillan', 'uillan', 'uillan@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (8, 'Raphaela', 'raphaela', 'raphaela@admin.com','123456');
+insert into auser(id, name, login, email, password) values (9, 'Victor', 'victor', 'victor@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (10, 'Jhuly', 'jhuly', 'jhuly@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (11, 'Mary', 'mary', 'mary@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (12, 'Aileen', 'aileen', 'aileen@admin.com','123456');
+insert into auser(id, name, login, email, password) values (13, 'Bailee', 'bailee', 'bailee@admin.com','123456');
+insert into auser(id, name, login, email, password) values (14, 'Sky', 'sky', 'sky@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (15, 'Mathy', 'mathy', 'mathy@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (16, 'Zoe', 'zoe', 'zoe@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (17, 'Paul', 'paul', 'paul@admin.com', '123456');
+insert into auser(id, name, login, email, password) values (18, 'August', 'august', 'august@admin.com','123456');
