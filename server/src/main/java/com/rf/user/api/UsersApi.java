@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import com.rf.rest.apiutils.ApiResponseMessage;
@@ -28,11 +29,10 @@ public class UsersApi {
 
 	@GET
 	@Path("/")
-	public Response getUserList(@QueryParam("email") String email, @QueryParam("id") String id, @QueryParam("password") String password,
-			@QueryParam("$size") String $size, @QueryParam("login") String login, @QueryParam("$sort") String $sort,
-			@QueryParam("$page") String $page, @QueryParam("name") String name) throws NotFoundException {
-		// do some magic!
-		return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "magic!")).build();
+	public Page<User> getUserList(@QueryParam("email") String email, @QueryParam("id") String id, @QueryParam("password") String password,
+			@QueryParam("size") String size, @QueryParam("login") String login, @QueryParam("sort") String sort,
+			@QueryParam("page") String page, @QueryParam("name") String name) throws NotFoundException {
+		return userBusiness.getPaginatedList(page, size, sort);
 	}
 
 	@POST

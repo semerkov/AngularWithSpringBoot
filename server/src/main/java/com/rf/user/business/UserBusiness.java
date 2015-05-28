@@ -1,10 +1,15 @@
 package com.rf.user.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import com.rf.user.domain.User;
 import com.rf.user.persistence.UserRepository;
+import com.rf.util.CastUtil;
 
 @Component
 public class UserBusiness {
@@ -42,6 +47,20 @@ public class UserBusiness {
 			return false;
 		}
 		return true;
+	}
+	
+	public Page<User> getPaginatedList(String pageString, String pageSizeString, String sortString) {
+		int page = CastUtil.toInt(pageString, 0);
+		int pageSize = CastUtil.toInt(pageSizeString, 10);
+		
+		Pageable pageable = null;
+		if (sortString == null) {
+			pageable = new PageRequest(page, pageSize);			
+		} else {
+			Sort sort = new Sort("id");
+			pageable = new PageRequest(page, pageSize, sort);
+		}
+		return userRepository.getPaginatedList(pageable);
 	}
 
 }
