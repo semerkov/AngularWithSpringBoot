@@ -1,0 +1,18 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="user in filtered">
+            <td>{{user.number}}</td>
+        </tr>
+    </table>
+    <pagination
+            ng-model="currentPage"
+            total-items="users.length"
+            max-size="maxSize"
+            boundary-links="true">
+    </pagination>
+</div>

@@ -26,8 +26,14 @@ mainModel.config(function($routeProvider) {
             controller  : 'MainCtrl'
         })
 
+        .when('/user/register', {
+            templateUrl : 'app/users/view/userRegistration.html',
+            controller  : 'UserRegistrationCtrl'
+        })
+
         .when('/user', {
-            templateUrl : 'app/users/view/cad_user.html',
-            controller  : 'CadUserCtrl'
-        });
+            templateUrl : 'app/users/view/usersList.html',
+            controller  : 'UsersListCtrl'
+        })
+    ;
 });
