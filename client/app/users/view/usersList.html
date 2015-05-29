@@ -1,12 +1,19 @@
 <div>
+    <button class="btn btn-primary" style="align:right">New user</button>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Number</th>
+                <th>#</th>
+                <th>Name</th>
+                <th>Login</th>
+                <th>Email</th>
             </tr>
         </thead>
-        <tr ng-repeat="user in filtered">
-            <td>{{user.number}}</td>
+        <tr ng-repeat="user in users">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.login}}</td>
+            <td>{{user.email}}</td>
         </tr>
     </table>
     <pagination

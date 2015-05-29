@@ -1,23 +1,19 @@
 var userModule = angular.module('app.usersModule');
 
-userModule.controller('UsersListCtrl', function ($scope) {
-    $scope.filtered = [];
+userModule.controller('UsersListCtrl', ['$scope', 'usersModuleResource', function ($scope, usersModuleResource) {
     $scope.currentPage = 1;
     $scope.numPerPage = 10;
     $scope.maxSize = 5;
 
-    $scope.makeUsers = function() {
-        $scope.users = [];
-        for (i=1;i<=1000;i++) {
-            $scope.users.push({ number:"user "+i, done:false});
-        }
+    $scope.loadPagesOfUser = function() {
+        var parameters = {"$size": $scope.numPerPage, "$sort": "", "$page": $scope.currentPage - 1};
+        var result = usersModuleResource.getUserList(parameters);
+        $scope.users = result.content;
+
     };
-    $scope.makeUsers();
+    $scope.loadPagesOfUser();
 
     $scope.$watch("currentPage + numPerPage", function() {
-        var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-            , end = begin + $scope.numPerPage;
-
-        $scope.filtered = $scope.users.slice(begin, end);
+        $scope.loadPagesOfUser();
     });
-});
+}]);
