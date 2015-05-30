@@ -1,27 +1,22 @@
 var module = angular.module('app.usersModule');
-module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', function($q, $http, $rootScope, domain) {
+module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', function($q, $http, $rootScope, domain) {
         'use strict';
 
         /**
          *
-         * @class resource
+         * @class UsersModuleResource
          * @param {(string|object)} [domainOrOptions] - The project domain or options object. If object, see the object's optional properties.
          * @param {string} [domainOrOptions.domain] - The project domain
          * @param {string} [domainOrOptions.cache] - An angularjs cache implementation
          * @param {object} [domainOrOptions.token] - auth token - object with value property and optional headerOrQueryName and isQuery properties
          * @param {string} [cache] - An angularjs cache implementation
          */
-        var resource = (function() {
-            function resource() {
+        var UsersModuleResource = (function() {
+            function UsersModuleResource() {
                 //wtv
             }
-            /*function resource(options, cache) {
-                cache = cache || ((typeof options === 'object') ? options.cache : cache);
-                this.cache = cache;
-                this.token = (typeof options === 'object') ? (options.token ? options.token : {}) : {};
-            }*/
 
-            resource.prototype.$on = function($scope, path, handler) {
+            UsersModuleResource.prototype.$on = function($scope, path, handler) {
                 var url = domain + path;
                 $scope.$on(url, function() {
                     handler();
@@ -29,14 +24,13 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 return this;
             };
 
-            resource.prototype.$broadcast = function(path) {
+            UsersModuleResource.prototype.$broadcast = function(path) {
                 var url = domain + path;
-                //cache.remove(url);
                 $rootScope.$broadcast(url);
                 return this;
             };
 
-            resource.transformRequest = function(obj) {
+            UsersModuleResource.transformRequest = function(obj) {
                 var str = [];
                 for (var p in obj) {
                     var val = obj[p];
@@ -54,13 +48,13 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Set Token
              * @method
-             * @name resource#setToken
+             * @name UsersModuleResource#setToken
              * @param {string} value - token's value
              * @param {string} headerOrQueryName - the header or query name to send the token at
              * @param {boolean} isQuery - true if send the token as query param, otherwise, send as header param
              *
              */
-            resource.prototype.setToken = function(value, headerOrQueryName, isQuery) {
+            UsersModuleResource.prototype.setToken = function(value, headerOrQueryName, isQuery) {
                 this.token.value = value;
                 this.token.headerOrQueryName = headerOrQueryName;
                 this.token.isQuery = isQuery;
@@ -69,7 +63,7 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Loads a list of User
              * @method
-             * @name resource#getUserList
+             * @name UsersModuleResource#getUserList
              * @param {string} email - Allows to filter the collections of result by the value of field email
              * @param {string} id - Allows to filter the collections of result by the value of field id
              * @param {string} password - Allows to filter the collections of result by the value of field password
@@ -80,13 +74,12 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
              * @param {string} name - Allows to filter the collections of result by the value of field name
              *
              */
-            resource.prototype.getUserList = function(parameters) {
+            UsersModuleResource.prototype.getUserList = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
                 var deferred = $q.defer();
 
-                var domain = this.domain;
                 var path = '/users/';
 
                 var body;
@@ -135,11 +128,6 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 }
 
                 var url = domain + path;
-                var cached = parameters.$cache && parameters.$cache.get(url);
-                if (cached !== undefined && parameters.$refresh !== true) {
-                    deferred.resolve(cached);
-                    return deferred.promise;
-                }
                 var options = {
                     timeout: parameters.$timeout,
                     method: 'GET',
@@ -151,14 +139,11 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = resource.transformRequest;
+                    options.transformRequest = UsersModuleResource.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
-                        if (parameters.$cache !== undefined) {
-                            parameters.$cache.put(url, data, parameters.$cacheItemOpts ? parameters.$cacheItemOpts : {});
-                        }
                     })
                     .error(function(data, status, headers, config) {
                         deferred.reject({
@@ -174,17 +159,15 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Adds a User
              * @method
-             * @name resource#postUser
+             * @name UsersModuleResource#postUser
              * @param {} body -
              *
              */
-            resource.prototype.postUser = function(parameters) {
+            UsersModuleResource.prototype.postUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
                 var deferred = $q.defer();
-
-                var domain = this.domain;
                 var path = '/users/';
 
                 var body;
@@ -216,14 +199,11 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = resource.transformRequest;
+                    options.transformRequest = UsersModuleResource.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
-                        if (parameters.$cache !== undefined) {
-                            parameters.$cache.put(url, data, parameters.$cacheItemOpts ? parameters.$cacheItemOpts : {});
-                        }
                     })
                     .error(function(data, status, headers, config) {
                         deferred.reject({
@@ -239,17 +219,16 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Loads a User
              * @method
-             * @name resource#getUser
+             * @name UsersModuleResource#getUser
              * @param {string} userid - Identifier of the User
              *
              */
-            resource.prototype.getUser = function(parameters) {
+            UsersModuleResource.prototype.getUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
                 var deferred = $q.defer();
 
-                var domain = this.domain;
                 var path = '/users/{userid}';
 
                 var body;
@@ -273,11 +252,6 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 }
 
                 var url = domain + path;
-                var cached = parameters.$cache && parameters.$cache.get(url);
-                if (cached !== undefined && parameters.$refresh !== true) {
-                    deferred.resolve(cached);
-                    return deferred.promise;
-                }
                 var options = {
                     timeout: parameters.$timeout,
                     method: 'GET',
@@ -289,14 +263,11 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = resource.transformRequest;
+                    options.transformRequest = UsersModuleResource.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
-                        if (parameters.$cache !== undefined) {
-                            parameters.$cache.put(url, data, parameters.$cacheItemOpts ? parameters.$cacheItemOpts : {});
-                        }
                     })
                     .error(function(data, status, headers, config) {
                         deferred.reject({
@@ -312,18 +283,17 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Stores a User
              * @method
-             * @name resource#putUser
+             * @name UsersModuleResource#putUser
              * @param {string} userid - Identifier of the User
              * @param {} body -
              *
              */
-            resource.prototype.putUser = function(parameters) {
+            UsersModuleResource.prototype.putUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
                 var deferred = $q.defer();
 
-                var domain = this.domain;
                 var path = '/users/{userid}';
 
                 var body;
@@ -362,14 +332,11 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = resource.transformRequest;
+                    options.transformRequest = UsersModuleResource.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
-                        if (parameters.$cache !== undefined) {
-                            parameters.$cache.put(url, data, parameters.$cacheItemOpts ? parameters.$cacheItemOpts : {});
-                        }
                     })
                     .error(function(data, status, headers, config) {
                         deferred.reject({
@@ -385,17 +352,16 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Deletes a User
              * @method
-             * @name resource#deleteUser
+             * @name UsersModuleResource#deleteUser
              * @param {string} userid - Identifier of the User
              *
              */
-            resource.prototype.deleteUser = function(parameters) {
+            UsersModuleResource.prototype.deleteUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }
                 var deferred = $q.defer();
 
-                var domain = this.domain;
                 var path = '/users/{userid}';
 
                 var body;
@@ -430,14 +396,11 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 if (Object.keys(form).length > 0) {
                     options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = resource.transformRequest;
+                    options.transformRequest = UsersModuleResource.transformRequest;
                 }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
-                        if (parameters.$cache !== undefined) {
-                            parameters.$cache.put(url, data, parameters.$cacheItemOpts ? parameters.$cacheItemOpts : {});
-                        }
                     })
                     .error(function(data, status, headers, config) {
                         deferred.reject({
@@ -451,8 +414,8 @@ module.factory('usersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 return deferred.promise;
             };
 
-            return resource;
+            return UsersModuleResource;
         })();
 
-        return resource;
+        return UsersModuleResource;
     }]);

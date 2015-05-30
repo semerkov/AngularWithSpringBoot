@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-extraProperties=sonar.host.url\=http\://server119\:9000/
+extraProperties=
 projectKey=com.rf\:restserver
 serverUrl=http\://localhost\:9000
 version=2

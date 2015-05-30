@@ -30,8 +30,8 @@ public class UsersApi {
 	@GET
 	@Path("/")
 	public Page<User> getUserList(@QueryParam("email") String email, @QueryParam("id") String id, @QueryParam("password") String password,
-			@QueryParam("size") String size, @QueryParam("login") String login, @QueryParam("sort") String sort,
-			@QueryParam("page") String page, @QueryParam("name") String name) throws NotFoundException {
+			@QueryParam("$size") String size, @QueryParam("login") String login, @QueryParam("$sort") String sort,
+			@QueryParam("$page") String page, @QueryParam("name") String name) throws NotFoundException {
 		return userBusiness.getPaginatedList(page, size, sort);
 	}
 

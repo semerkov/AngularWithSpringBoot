@@ -6,8 +6,8 @@ var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute',
 mainModel.run(function ($http) {
 
 	// Adds HTTP basic authentication to all your calls to the API
-    var encoded = btoa('<username>:<password>');
-    $http.defaults.headers.common.Authorization = 'Basic ' + encoded;
+    //var encoded = btoa('<username>:<password>');
+    //$http.defaults.headers.common.Authorization = 'Basic ' + encoded;
 
 });
 
@@ -16,7 +16,7 @@ mainModel.controller('MainCtrl', function ($scope, $http, $q, $location, $timeou
 	
 });
 
-mainModel.constant('domain','http://localhost:8080/');
+mainModel.constant('domain','http://localhost:8080');
 
 mainModel.config(function($routeProvider) {
     $routeProvider
