@@ -157,23 +157,23 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Adds a User
              * @method
-             * @name UsersModuleResource#postUser
-             * @param {} body -
+             * @name UsersModuleResource#saveUser
+             * @param {} user -
              *
              */
-            UsersModuleResource.prototype.postUser = function(parameters) {
-                if (parameters === undefined) {
-                    parameters = {};
+            UsersModuleResource.prototype.saveUser = function(user) {
+                if (user === undefined) {
+                    user = {};
+                    // remember to throw exception
                 }
                 var deferred = $q.defer();
                 var path = '/users/';
 
-                var body;
-                var queryParameters = {};
+                //var body;
                 var headers = {};
                 var form = {};
 
-                if (parameters['body'] !== undefined) {
+                /*if (parameters['body'] !== undefined) {
                     body = parameters['body'];
                 }
 
@@ -183,19 +183,17 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                             var parameter = parameters.$queryParameters[parameterName];
                             queryParameters[parameterName] = parameter;
                         });
-                }
+                }*/
 
                 var url = domain + path;
                 var options = {
-                    timeout: parameters.$timeout,
                     method: 'POST',
                     url: url,
-                    params: queryParameters,
-                    data: body,
+                    data: user,
                     headers: headers
                 };
                 if (Object.keys(form).length > 0) {
-                    options.data = form;
+                    //options.data = form;
                     options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
                     options.transformRequest = UsersModuleResource.transformRequest;
                 }
@@ -281,12 +279,12 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             /**
              * Stores a User
              * @method
-             * @name UsersModuleResource#putUser
+             * @name UsersModuleResource#updateUser
              * @param {string} userid - Identifier of the User
              * @param {} body -
              *
              */
-            UsersModuleResource.prototype.putUser = function(parameters) {
+            UsersModuleResource.prototype.updateUser = function(parameters) {
                 if (parameters === undefined) {
                     parameters = {};
                 }

@@ -1,5 +1,6 @@
 package com.rf.user.api;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -36,6 +37,7 @@ public class UsersApi {
 	}
 
 	@POST
+	@Consumes("application/x-www-form-urlencoded")
 	@Path("/")
 	public Response postUser(User user) throws NotFoundException {
 		boolean saveResult = userBusiness.saveUser(user);
