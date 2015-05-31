@@ -1,6 +1,6 @@
 var userModule = angular.module('app.usersModule');
 
-userModule.controller('UsersListCtrl', ['$scope', 'UsersModuleResource', function ($scope, UsersModuleResource) {
+userModule.controller('UsersListCtrl', ['$scope', '$location', 'UsersModuleResource', function ($scope, $location, UsersModuleResource) {
     $scope.currentPage = 1;
     $scope.numPerPage = 10;
     $scope.maxSize = 5;
@@ -22,4 +22,8 @@ userModule.controller('UsersListCtrl', ['$scope', 'UsersModuleResource', functio
     $scope.$watch("currentPage + numPerPage", function() {
         $scope.loadPagesOfUser();
     });
+
+    $scope.go = function ( path ) {
+        $location.path( path );
+    };
 }]);

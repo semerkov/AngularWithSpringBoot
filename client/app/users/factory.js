@@ -12,9 +12,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
          * @param {string} [cache] - An angularjs cache implementation
          */
         var UsersModuleResource = (function() {
-            function UsersModuleResource() {
-                //wtv
-            }
+            function UsersModuleResource() { }
 
             UsersModuleResource.prototype.$on = function($scope, path, handler) {
                 var url = domain + path;
