@@ -9,11 +9,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.rf.rest.apiutils.ApiResponseMessage;
 import com.rf.rest.apiutils.NotFoundException;
@@ -37,15 +40,16 @@ public class UsersApi {
 	}
 
 	@POST
-	@Consumes("application/x-www-form-urlencoded")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/")
-	public Response postUser(User user) throws NotFoundException {
-		boolean saveResult = userBusiness.saveUser(user);
+	public Response postUser(MultivaluedMap<String, String> formParams) throws NotFoundException {
+		/*boolean saveResult = userBusiness.saveUser(user);
 		if (saveResult) {
 			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!")).build();
 		} else {
 			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user")).build();
-		}
+		}*/
+		return null;
 	}
 
 	@GET

@@ -192,11 +192,9 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                     data: user,
                     headers: headers
                 };
-                if (Object.keys(form).length > 0) {
-                    //options.data = form;
-                    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UsersModuleResource.transformRequest;
-                }
+                options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                options.transformRequest = UsersModuleResource.transformRequest;
+
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
