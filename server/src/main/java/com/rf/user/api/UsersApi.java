@@ -25,7 +25,7 @@ import com.rf.user.domain.User;
 
 @Component
 @Path("/users")
-@Produces({ "application/json" })
+@Produces(MediaType.APPLICATION_JSON)
 public class UsersApi {
 
 	@Autowired
@@ -40,16 +40,14 @@ public class UsersApi {
 	}
 
 	@POST
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/")
-	public Response postUser(MultivaluedMap<String, String> formParams) throws NotFoundException {
-		/*boolean saveResult = userBusiness.saveUser(user);
+	public Response postUser(User user) throws NotFoundException {
+		boolean saveResult = userBusiness.saveUser(user);
 		if (saveResult) {
 			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!")).build();
 		} else {
 			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user")).build();
-		}*/
-		return null;
+		}
 	}
 
 	@GET

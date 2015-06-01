@@ -171,7 +171,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
 
                 //var body;
                 var headers = {};
-                var form = {};
+                //var form = {};
 
                 /*if (parameters['body'] !== undefined) {
                     body = parameters['body'];
@@ -192,8 +192,9 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                     data: user,
                     headers: headers
                 };
-                options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                options.transformRequest = UsersModuleResource.transformRequest;
+                options.headers['Content-Type'] = 'application/json';
+                //options.transformRequest = UsersModuleResource.transformRequest;
+
 
                 $http(options)
                     .success(function(data, status, headers, config) {
