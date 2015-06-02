@@ -169,32 +169,16 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 var deferred = $q.defer();
                 var path = '/users/';
 
-                //var body;
                 var headers = {};
-                //var form = {};
-
-                /*if (parameters['body'] !== undefined) {
-                    body = parameters['body'];
-                }
-
-                if (parameters.$queryParameters) {
-                    Object.keys(parameters.$queryParameters)
-                        .forEach(function(parameterName) {
-                            var parameter = parameters.$queryParameters[parameterName];
-                            queryParameters[parameterName] = parameter;
-                        });
-                }*/
 
                 var url = domain + path;
                 var options = {
                     method: 'POST',
                     url: url,
-                    data: user,
+                    data: {name: user.name, email: user.email, login: user.login, password: user.password},
                     headers: headers
                 };
                 options.headers['Content-Type'] = 'application/json';
-                //options.transformRequest = UsersModuleResource.transformRequest;
-
 
                 $http(options)
                     .success(function(data, status, headers, config) {

@@ -1,12 +1,20 @@
 package com.rf.user.domain;
 
+import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+import org.hibernate.annotations.GeneratorType;
 
 @Entity(name = "auser")
 public class User {
 	@Id
+	@SequenceGenerator(name="seq_auser", sequenceName="seq_auser", allocationSize=1, initialValue = 20)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_auser")
 	private Long id;
 	@Column(length = 100, nullable = false)
 	private String name;
