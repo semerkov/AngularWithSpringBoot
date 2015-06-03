@@ -26,4 +26,8 @@ userModule.controller('UsersListCtrl', ['$scope', '$location', 'UsersModuleResou
     $scope.go = function ( path ) {
         $location.path( path );
     };
+
+    $scope.redirectToUser = function ( id ) {
+        $scope.go("/user/register/" + id);
+    }
 }]);

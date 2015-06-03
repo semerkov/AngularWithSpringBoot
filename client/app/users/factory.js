@@ -202,48 +202,20 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
              * @param {string} userid - Identifier of the User
              *
              */
-            UsersModuleResource.prototype.getUser = function(parameters) {
-                if (parameters === undefined) {
-                    parameters = {};
+            UsersModuleResource.prototype.getUser = function(userid) {
+                if (userid === undefined) {
+                    // remember to throw exception
                 }
                 var deferred = $q.defer();
 
                 var path = '/users/{userid}';
-
-                var body;
-                var queryParameters = {};
-                var headers = {};
-                var form = {};
-
-                path = path.replace('{userid}', parameters['userid']);
-
-                if (parameters['userid'] === undefined) {
-                    deferred.reject(new Error('Missing required  parameter: userid'));
-                    return deferred.promise;
-                }
-
-                if (parameters.$queryParameters) {
-                    Object.keys(parameters.$queryParameters)
-                        .forEach(function(parameterName) {
-                            var parameter = parameters.$queryParameters[parameterName];
-                            queryParameters[parameterName] = parameter;
-                        });
-                }
+                path = path.replace('{userid}', userid);
 
                 var url = domain + path;
                 var options = {
-                    timeout: parameters.$timeout,
                     method: 'GET',
-                    url: url,
-                    params: queryParameters,
-                    data: body,
-                    headers: headers
+                    url: url
                 };
-                if (Object.keys(form).length > 0) {
-                    options.data = form;
-                    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UsersModuleResource.transformRequest;
-                }
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);

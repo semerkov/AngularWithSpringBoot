@@ -25,8 +25,11 @@ mainModel.config(function($routeProvider) {
             templateUrl : 'app/home.html',
             controller  : 'MainCtrl'
         })
-
-        .when('/user/register', {
+        .when('/user/register/', {
+            templateUrl : 'app/users/view/userRegistration.html',
+            controller  : 'UserRegistrationCtrl'
+        })
+        .when('/user/register/:userid', {
             templateUrl : 'app/users/view/userRegistration.html',
             controller  : 'UserRegistrationCtrl'
         })

@@ -1,8 +1,19 @@
 var userModule = angular.module('app.usersModule');
 
-userModule.controller('UserRegistrationCtrl', ['$scope', 'UsersModuleResource', function ($scope, UsersModuleResource) {
+userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', 'UsersModuleResource', function ($scope, $routeParams, UsersModuleResource) {
     UsersModuleResource = new UsersModuleResource();
-    $scope.user = {};
+    var userid = $routeParams.userid;
+    if (userid === undefined) {
+        $scope.user = {};
+    } else {
+        var promisse = UsersModuleResource.getUser(userid);
+        promisse.then(function(result) {
+            $scope.user = result;
+        }, function(reason) {
+            addMessage(reason);
+            $scope.success = false;
+        });
+    }
     $scope.messages = [];
     $scope.success = true;
 
