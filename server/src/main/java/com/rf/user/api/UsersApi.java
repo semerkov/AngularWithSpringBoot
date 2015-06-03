@@ -10,13 +10,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.rf.rest.apiutils.ApiResponseMessage;
 import com.rf.rest.apiutils.NotFoundException;
@@ -25,6 +23,7 @@ import com.rf.user.domain.User;
 
 @Component
 @Path("/users")
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsersApi {
 
@@ -42,11 +41,11 @@ public class UsersApi {
 	@POST
 	@Path("/")
 	public Response postUser(User user) throws NotFoundException {
-		boolean saveResult = userBusiness.saveUser(user);
-		if (saveResult) {
-			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User saved!", user)).build();
-		} else {
-			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to save user")).build();
+		try {
+			User userSaved = userBusiness.saveUser(user);
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User saved!", userSaved)).build();
+		} catch (Exception e) {
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to save user: " + e.getMessage())).build();			
 		}
 	}
 
@@ -58,8 +57,14 @@ public class UsersApi {
 
 	@PUT
 	@Path("/{userid}")
-	public boolean putUser(@PathParam("userid") String userid, User user) throws NotFoundException {
-		return userBusiness.saveUser(user);
+	public Response putUser(@PathParam("userid") String userid, User user) throws NotFoundException {
+		try {
+			user.setId(Long.valueOf(userid));
+			User userSaved = userBusiness.saveUser(user);
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User updated!", userSaved)).build();
+		} catch (Exception e) {
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to update user")).build();
+		}
 	}
 
 	@DELETE

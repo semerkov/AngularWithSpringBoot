@@ -23,12 +23,8 @@ public class UserBusiness {
 		this.userRepository = userRepository;
 	}
 
-	public boolean saveUser(User user) {
-		userRepository.save(user);
-		if (user.getId() > 0) {
-			return true;
-		}
-		return false;
+	public User saveUser(User user) {
+		return userRepository.save(user);
 	}
 
 	public boolean existsUsers() {

@@ -175,7 +175,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 var options = {
                     method: 'POST',
                     url: url,
-                    data: {name: user.name, email: user.email, login: user.login, password: user.password},
+                    data: {id: user.id, name: user.name, email: user.email, login: user.login, password: user.password},
                     headers: headers
                 };
                 options.headers['Content-Type'] = 'application/json';
@@ -267,52 +267,26 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
              * @param {} body -
              *
              */
-            UsersModuleResource.prototype.updateUser = function(parameters) {
-                if (parameters === undefined) {
-                    parameters = {};
+            UsersModuleResource.prototype.updateUser = function(user) {
+                if (user === undefined) {
+                    // remember to throw exception
                 }
                 var deferred = $q.defer();
 
-                var path = '/users/{userid}';
 
-                var body;
-                var queryParameters = {};
                 var headers = {};
-                var form = {};
 
-                path = path.replace('{userid}', parameters['userid']);
-
-                if (parameters['userid'] === undefined) {
-                    deferred.reject(new Error('Missing required  parameter: userid'));
-                    return deferred.promise;
-                }
-
-                if (parameters['body'] !== undefined) {
-                    body = parameters['body'];
-                }
-
-                if (parameters.$queryParameters) {
-                    Object.keys(parameters.$queryParameters)
-                        .forEach(function(parameterName) {
-                            var parameter = parameters.$queryParameters[parameterName];
-                            queryParameters[parameterName] = parameter;
-                        });
-                }
-
+                var path = '/users/{userid}';
+                path = path.replace('{userid}', user.id);
                 var url = domain + path;
                 var options = {
-                    timeout: parameters.$timeout,
                     method: 'PUT',
                     url: url,
-                    params: queryParameters,
-                    data: body,
+                    data: {name: user.name, email: user.email, login: user.login, password: user.password},
                     headers: headers
                 };
-                if (Object.keys(form).length > 0) {
-                    options.data = form;
-                    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                    options.transformRequest = UsersModuleResource.transformRequest;
-                }
+                options.headers['Content-Type'] = 'application/json';
+
                 $http(options)
                     .success(function(data, status, headers, config) {
                         deferred.resolve(data);
