@@ -44,9 +44,9 @@ public class UsersApi {
 	public Response postUser(User user) throws NotFoundException {
 		boolean saveResult = userBusiness.saveUser(user);
 		if (saveResult) {
-			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "saved!")).build();
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User saved!", user)).build();
 		} else {
-			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to save user")).build();
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to save user")).build();
 		}
 	}
 

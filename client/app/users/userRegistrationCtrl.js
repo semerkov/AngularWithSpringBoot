@@ -5,19 +5,33 @@ userModule.controller('UserRegistrationCtrl', ['$scope', 'UsersModuleResource', 
     UsersModuleResource = new UsersModuleResource();
 
     $scope.save = function(user) {
+        $scope.messages = [];
+        $scope.success = true;
         if ($scope.form.$invalid) {
             alert("pray for the gods");
         }
         if (user.id == null) {
             var promisse = UsersModuleResource.saveUser(user);
             promisse.then(function(result) {
-                $scope.users = result.content;
-                $scope.totalElements = result.totalElements;
+                addMessage(result.message);
+                $scope.success = true;
+                $scope.user = result.object;
             }, function(reason) {
-                alert('Failed: ' + '');
+                addMessage(reason);
+                $scope.success = false;
             });
         } else {
-            UsersModuleResource.updateUser(user);
+            var promisse = UsersModuleResource.updateUser(user);
+            // Pending implementation
+        }
+
+        function addMessage(message) {
+            clearAllMessages();
+            $scope.messages.push(message);
+        }
+
+        function clearAllMessages() {
+            $scope.messages = [];
         }
     };
 }]);

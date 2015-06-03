@@ -10,14 +10,25 @@ public class ApiResponseMessage {
 	public static final int OK = 4;
 	public static final int TOO_BUSY = 5;
 
-	int code;
-	String type;
-	String message;
+	private int code;
+	private String type;
+	private String message;
+	private Object object;
 	
 	public ApiResponseMessage(){}
 	
 	public ApiResponseMessage(int code, String message){
-		this.code = code;
+		this(code, message, null);
+	}
+	
+	public ApiResponseMessage(int code, String message, Object object){
+		setCode(code);
+		defineCodeMessage();
+		setMessage(message);
+		setObject(object);
+	}
+	
+	public void defineCodeMessage() {
 		switch(code){
 		case ERROR:
 			setType("error");
@@ -38,7 +49,6 @@ public class ApiResponseMessage {
 			setType("unknown");
 			break;
 		}
-		this.message = message;
 	}
 
 	@XmlTransient
@@ -64,5 +74,13 @@ public class ApiResponseMessage {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Object getObject() {
+		return object;
+	}
+
+	public void setObject(Object object) {
+		this.object = object;
 	}
 }
