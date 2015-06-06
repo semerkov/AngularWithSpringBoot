@@ -28,7 +28,7 @@
                 <input type="password" class="form-control" id="passwordConfirmation" ng-model="user.passwordConfirmation">
             </div>
             <button type="submit" class="btn btn-primary" ng-click="save(user)" ng-disabled="form.$invalid">Save</button>
-            <button type="button" class="btn btn-danger" ng-click="delete(user)" ng-show="user.id != null">Delete</button>
+            <button type="button" class="btn btn-danger" ng-really-message="Are you sure ?"  ng-really-click="confirmDelete()" ng-show="user.id != null">Delete</button>
         </div>
     </form>
 </div>

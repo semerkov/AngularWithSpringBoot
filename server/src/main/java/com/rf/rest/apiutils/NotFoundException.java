@@ -1,9 +1,10 @@
 package com.rf.rest.apiutils;
 
 public class NotFoundException extends ApiException {
-	private int code;
-	public NotFoundException (int code, String msg) {
-		super(code, msg);
-		this.code = code;
+
+	private static final long serialVersionUID = -4192885852362010662L;
+
+	public NotFoundException (String msg) {
+		super(msg);
 	}
 }

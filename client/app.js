@@ -1,6 +1,6 @@
 'use strict';
 
-var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute',
+var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngReallyClickModule',
                                         'app.usersModule']);
 
 mainModel.run(function ($http) {

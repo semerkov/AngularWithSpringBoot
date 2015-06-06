@@ -1,6 +1,6 @@
 var userModule = angular.module('app.usersModule');
 
-userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', 'UsersModuleResource', function ($scope, $routeParams, UsersModuleResource) {
+userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal', 'UsersModuleResource', function ($scope, $routeParams, $modal, UsersModuleResource) {
     UsersModuleResource = new UsersModuleResource();
     var userid = $routeParams.userid;
     if (userid === undefined) {
@@ -37,6 +37,25 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', 'UsersM
         });
 
     };
+
+    function deleteUser() {
+        var promisse = UsersModuleResource.deleteUser($scope.user.id);
+        promisse.then(function(result) {
+            addMessage(result.message);
+            $scope.success = true;
+            $scope.user = {};
+        }, function(reason) {
+            addMessage(reason);
+            $scope.success = false;
+        });
+    }
+
+    $scope.confirmDelete = function() {
+        /*var dlg = $dialogs.confirm('Please Confirm','You really want to delete this user?');
+        dlg.result.then(function(btn){
+            deleteUser();
+        });*/
+    }
 
     function addMessage(message) {
         clearAllMessages();
