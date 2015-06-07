@@ -22,16 +22,9 @@ angular.module('ngReallyClickModule', ['ui.bootstrap'])
                     element.bind('click', function() {
                         var message = attrs.ngReallyMessage || "Are you sure ?";
 
-                        /*
-                         //This works
-                         if (message && confirm(message)) {
-                         scope.$apply(attrs.ngReallyClick);
-                         }
-                         //*/
-
-                        //*This doesn't works
-                        var modalHtml = '<div class="modal-body">' + message + '</div>';
-                        modalHtml += '<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">OK</button><button class="btn btn-warning" ng-click="cancel()">Cancel</button></div>';
+                        var modalHtml = '<div class="modal-body"><h1>Warning</h1>' + message + '</div>';
+                        modalHtml += '<div class="modal-footer"><button class="btn btn-danger" ng-click="ok()">Yes</button>';
+                        modalHtml += '<button class="btn" ng-click="cancel()">No</button></div>';
 
                         var modalInstance = $modal.open({
                             template: modalHtml,
@@ -39,11 +32,10 @@ angular.module('ngReallyClickModule', ['ui.bootstrap'])
                         });
 
                         modalInstance.result.then(function() {
-                            scope.ngReallyClick({item:scope.item}); //raise an error : $digest already in progress
+                            scope.ngReallyClick({item:scope.item});
                         }, function() {
                             //Modal dismissed
                         });
-                        //*/
 
                     });
 

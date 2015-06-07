@@ -38,7 +38,7 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
 
     };
 
-    function deleteUser() {
+    $scope.deleteUser = function() {
         var promisse = UsersModuleResource.deleteUser($scope.user.id);
         promisse.then(function(result) {
             addMessage(result.message);
@@ -48,13 +48,6 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
             addMessage(reason);
             $scope.success = false;
         });
-    }
-
-    $scope.confirmDelete = function() {
-        /*var dlg = $dialogs.confirm('Please Confirm','You really want to delete this user?');
-        dlg.result.then(function(btn){
-            deleteUser();
-        });*/
     }
 
     function addMessage(message) {
