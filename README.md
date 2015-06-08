@@ -7,6 +7,7 @@ You can use this example (or boilerplate) to start a real application for produc
 - Lazy pagination of list
 - CRUD of user
 - Login screen and session control (Not yet implemented)
+- Internationalization (Not yet implemented)
 - Bower for javascript dependencies
 - Maven for java dependencies
 
