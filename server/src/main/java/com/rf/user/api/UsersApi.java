@@ -52,12 +52,16 @@ public class UsersApi {
 	@GET
 	@Path("/{userid}")
 	public User getUser(@PathParam("userid") Long userid) throws NotFoundException {
-		return userBusiness.load(userid);
+		try {
+			return userBusiness.load(userid);			
+		} catch (Exception e) {
+			throw new NotFoundException("User not found");
+		}
 	}
 
 	@PUT
 	@Path("/{userid}")
-	public Response putUser(@PathParam("userid") String userid, User user) throws NotFoundException {
+	public Response putUser(@PathParam("userid") String userid, User user) {
 		try {
 			user.setId(Long.valueOf(userid));
 			User userSaved = userBusiness.saveUser(user);
@@ -69,12 +73,12 @@ public class UsersApi {
 
 	@DELETE
 	@Path("/{userid}")
-	public Response deleteUser(@PathParam("userid") Long userid) throws NotFoundException {
-		boolean result = userBusiness.delete(userid);
-		if (result) {
-			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "deleted with success!")).build();
-		} else {
-			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "failed to delete user")).build();
+	public Response deleteUser(@PathParam("userid") Long userid) {
+		try {
+			userBusiness.delete(userid);
+			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User deleted with success!")).build();
+		} catch (Exception e) {
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to delete user: " + e.getMessage())).build();			
 		}
 	}
 }
