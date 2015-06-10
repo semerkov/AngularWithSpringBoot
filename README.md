@@ -1,5 +1,5 @@
 # AngularJS + Spring boot with JPA + Spring security Full example
-An example of full application with AngularJS 1.6 in front end, Spring Boot with JPA (using Hibernate implementation), PostgreSQL DB and Spring security to protect Jersey endpoints.
+An example of full application with AngularJS 1.3.15 in front end, Spring Boot with JPA (using Hibernate implementation), PostgreSQL DB and Spring security to protect Jersey endpoints.
 You can use this example (or boilerplate) to start a real application for production, not only to learn this technologies. Fell free to contribute.
 
 # Features
