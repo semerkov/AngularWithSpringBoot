@@ -83,7 +83,7 @@ mainModel.config(
 }]);
 
 mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
-
+    LoginService = new LoginService();
     /* Reset error when a new view is loaded */
     $rootScope.$on('$viewContentLoaded', function() {
         delete $rootScope.error;
@@ -115,9 +115,12 @@ mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
     var authToken = $cookieStore.get('authToken');
     if (authToken !== undefined) {
         $rootScope.authToken = authToken;
-        LoginService.get(function(user) {
+        var promisseUser = LoginService.getLoggerUser();
+        promisseUser.then(function(user) {
             $rootScope.user = user;
             $location.path(originalPath);
+        }, function(reason) {
+            // Print error message
         });
     }
 

@@ -50,6 +50,32 @@ angular.module('app.loginModule').factory('LoginService', function($q, $http, $r
             return deferred.promise;
         };
 
+        LoginService.prototype.getLoggerUser = function() {
+            var deferred = $q.defer();
+
+            var path = '/login/';
+            var url = domain + path;
+            var options = {
+                method: 'GET',
+                url: url
+            };
+
+            $http(options)
+                .success(function(data, status, headers, config) {
+                    deferred.resolve(data);
+                })
+                .error(function(data, status, headers, config) {
+                    deferred.reject({
+                        status: status,
+                        headers: headers,
+                        config: config,
+                        body: data
+                    });
+                });
+
+            return deferred.promise;
+        };
+
         return LoginService;
     })();
 

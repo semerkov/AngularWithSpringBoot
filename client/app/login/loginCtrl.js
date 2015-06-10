@@ -1,9 +1,9 @@
 var userModule = angular.module('app.loginModule');
 
-userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'LoginService',
-                        function ($scope, $rootScope, $location, $cookieStore, LoginService) {
+userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'LoginService', function ($scope, $rootScope, $location, $cookieStore, LoginService) {
+
     $scope.rememberMe = false;
-                            LoginService = new LoginService();
+    LoginService = new LoginService();
 
     $scope.login = function() {
         var user = {username: $scope.username, password: $scope.password};
@@ -14,10 +14,14 @@ userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cooki
             if ($scope.rememberMe) {
                 $cookieStore.put('authToken', authToken);
             }
-            LoginService.get(function(user) {
+            var promisseUser = LoginService.getLoggerUser();
+            promisseUser.then(function(user) {
                 $rootScope.user = user;
-                $location.path("/");
+            }, function(reason) {
+                // Print error message
             });
+        }, function(reason) {
+            // Print error message
         });
     };
 }]);
