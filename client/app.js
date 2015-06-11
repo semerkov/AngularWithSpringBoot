@@ -117,7 +117,11 @@ mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
         var promisseUser = LoginService.getLoggerUser();
         promisseUser.then(function(user) {
             $rootScope.user = user;
-            $location.path(originalPath);
+            if (originalPath == "/login") {
+                $location.path("/");
+            } else {
+                $location.path(originalPath);
+            }
         }, function(reason) {
             // Print error message
         });
@@ -125,3 +129,14 @@ mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
 
     $rootScope.initialized = true;
 });
+
+module.run( function($rootScope, $location) {
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        if ( $rootScope.user == null ) {
+            if ( next.templateUrl == "/login" ) {
+            } else {
+                $location.path( "/login" );
+            }
+        }
+    });
+})
