@@ -30,7 +30,7 @@
 	</security:authentication-manager>
 
 	<security:http realm="Protected API" use-expressions="true"
-		auto-config="false" create-session="stateless" entry-point-ref="unauthorizedEntryPoint"
+		auto-config="false" create-session="always" entry-point-ref="unauthorizedEntryPoint"
 		authentication-manager-ref="authenticationManager">
 		<security:custom-filter ref="authenticationTokenProcessingFilter"
 			position="FORM_LOGIN_FILTER" />

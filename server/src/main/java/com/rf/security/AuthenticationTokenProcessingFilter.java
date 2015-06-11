@@ -71,7 +71,7 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean
 
 		/* If token not found get it from request parameter */
 		if (authToken == null) {
-			authToken = httpRequest.getParameter("token");
+			authToken = httpRequest.getParameter("authToken");
 		}
 
 		return authToken;

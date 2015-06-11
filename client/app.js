@@ -61,8 +61,7 @@ mainModel.config(
     $httpProvider.interceptors.push(function ($q, $rootScope) {
             return {
                 'request': function(config) {
-                    var isRestCall = config.url.indexOf('rest') == 0;
-                    if (isRestCall && angular.isDefined($rootScope.authToken)) {
+                    if (angular.isDefined($rootScope.authToken)) {
                         var authToken = $rootScope.authToken;
 
                         /* When set to false a query parameter is used to pass on the auth token.

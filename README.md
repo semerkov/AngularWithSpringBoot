@@ -5,7 +5,7 @@ You can use this example (or boilerplate) to start a real application for produc
 - AngularJS SPA demonstration with sub modules, router, factory, constants
 - Lazy pagination of list
 - CRUD of user
-- Login screen and session control (Not yet implemented)
+- Login screen and session control
 - Internationalization (Not yet implemented)
 - Bower for javascript dependencies
 - Maven for java dependencies
