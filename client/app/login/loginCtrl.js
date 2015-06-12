@@ -19,10 +19,10 @@ userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cooki
                 $rootScope.loggedUser = user;
                 $location.path("/");
             }, function(reason) {
-                // Print error message
+                $scope.messages = [reason];
             });
         }, function(reason) {
-            // Print error message
+            $scope.messages = ['Incorrect login/password entered. Please try again.'];
         });
     };
 }]);

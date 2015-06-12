@@ -6,6 +6,9 @@
     <div align="center">
         <div style="width: 500px;">
             <form class="form-horizontal">
+                <div class="alert alert-danger" ng-show="messages.length > 0" role="alert">
+                    <div ng-repeat="message in messages">{{message}}</div>
+                </div>
                 <div class="form-group">
                     <label for="username" class="col-sm-3 control-label">User Name:</label>
                     <div class="col-sm-9">
