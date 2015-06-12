@@ -35,6 +35,7 @@ public class User implements UserDetails {
 	private String email;
 	@Column(length = 80, nullable = false)
 	private String password;
+	@Column(name = "role")
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> roles = new HashSet<String>();
 

@@ -44,21 +44,6 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
             };
 
             /**
-             * Set Token
-             * @method
-             * @name UsersModuleResource#setToken
-             * @param {string} value - token's value
-             * @param {string} headerOrQueryName - the header or query name to send the token at
-             * @param {boolean} isQuery - true if send the token as query param, otherwise, send as header param
-             *
-             */
-            UsersModuleResource.prototype.setToken = function(value, headerOrQueryName, isQuery) {
-                this.token.value = value;
-                this.token.headerOrQueryName = headerOrQueryName;
-                this.token.isQuery = isQuery;
-            };
-
-            /**
              * Loads a list of User
              * @method
              * @name UsersModuleResource#getUserList
@@ -78,7 +63,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 }
                 var deferred = $q.defer();
 
-                var path = '/users/';
+                var path = '/protected/users/';
 
                 var body;
                 var queryParameters = {};
@@ -167,7 +152,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                     // remember to throw exception
                 }
                 var deferred = $q.defer();
-                var path = '/users/';
+                var path = '/protected/users/';
 
                 var headers = {};
 
@@ -208,7 +193,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 }
                 var deferred = $q.defer();
 
-                var path = '/users/{userid}';
+                var path = '/protected/users/{userid}';
                 path = path.replace('{userid}', userid);
 
                 var url = domain + path;
@@ -248,7 +233,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
 
                 var headers = {};
 
-                var path = '/users/{userid}';
+                var path = '/protected/users/{userid}';
                 path = path.replace('{userid}', user.id);
                 var url = domain + path;
                 var options = {
@@ -287,7 +272,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 }
                 var deferred = $q.defer();
 
-                var path = '/users/{userid}';
+                var path = '/protected/users/{userid}';
 
                 var queryParameters = {};
                 var headers = {};

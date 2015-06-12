@@ -22,7 +22,7 @@ import com.rf.user.business.UserBusiness;
 import com.rf.user.domain.User;
 
 @Component
-@Path("/users")
+@Path("/protected/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsersApi {

@@ -2,7 +2,7 @@ var userModule = angular.module('app.loginModule');
 
 userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cookieStore', 'LoginService', function ($scope, $rootScope, $location, $cookieStore, LoginService) {
 
-    $scope.rememberMe = false;
+    $scope.rememberMe = true;
     LoginService = new LoginService();
 
     $scope.login = function() {
@@ -16,7 +16,8 @@ userModule.controller('LoginCtrl', ['$scope', '$rootScope', '$location', '$cooki
             }
             var promisseUser = LoginService.getLoggerUser();
             promisseUser.then(function(user) {
-                $rootScope.user = user;
+                $rootScope.loggedUser = user;
+                $location.path("/");
             }, function(reason) {
                 // Print error message
             });

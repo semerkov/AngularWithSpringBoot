@@ -83,26 +83,12 @@ mainModel.config(
 
 mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
     LoginService = new LoginService();
-    /* Reset error when a new view is loaded */
     $rootScope.$on('$viewContentLoaded', function() {
         delete $rootScope.error;
     });
 
-    $rootScope.hasRole = function(role) {
-
-        if ($rootScope.user === undefined) {
-            return false;
-        }
-
-        if ($rootScope.user.roles[role] === undefined) {
-            return false;
-        }
-
-        return $rootScope.user.roles[role];
-    };
-
     $rootScope.logout = function() {
-        delete $rootScope.user;
+        delete $rootScope.loggedUser;
         delete $rootScope.authToken;
         $cookieStore.remove('authToken');
         $location.path("/login");
@@ -116,7 +102,7 @@ mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
         $rootScope.authToken = authToken;
         var promisseUser = LoginService.getLoggerUser();
         promisseUser.then(function(user) {
-            $rootScope.user = user;
+            $rootScope.loggedUser = user;
             if (originalPath == "/login") {
                 $location.path("/");
             } else {
@@ -132,7 +118,7 @@ mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
 
 module.run( function($rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-        if ( $rootScope.user == null ) {
+        if ( $rootScope.loggedUser == null ) {
             if ( next.templateUrl == "/login" ) {
             } else {
                 $location.path( "/login" );
