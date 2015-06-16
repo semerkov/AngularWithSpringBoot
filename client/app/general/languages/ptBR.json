@@ -1,0 +1,37 @@
+{
+    "yes" : "Sim",
+    "no" : "Não",
+    "confirm" : "Confirmar",
+    "cancel" : "Cancelar",
+    "navbar": {
+        "home": "Início",
+        "users": "Usuários",
+        "userdropdown": {
+            "label" : "Usuário",
+            "profile" : "Perfil",
+            "logout" : "Logout"
+        }
+    },
+    "pagination": {
+        "previous" : "Anterior",
+        "next" : "Próxima",
+        "first" : "Primeira",
+        "last" : "Última"
+    },
+    "user": {
+        "name" : "Nome",
+        "login" : "Login",
+        "email" : "E-mail",
+        "password" : "Senha",
+        "retype_password" : "Repita a senha",
+        "action" : {
+            "newuser" : "Novo usuário",
+            "save" : "Salvar",
+            "delete" : "Deletar",
+            "confirmationMessage" : "Você quer realmente deletar este usuário?"
+        },
+        "title" : {
+            "registration" : "Cadastro de usuário"
+        }
+    }
+}

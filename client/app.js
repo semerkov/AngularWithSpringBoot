@@ -1,6 +1,6 @@
 'use strict';
 
-var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngReallyClickModule', 'ngCookies', 'ngResource',
+var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngReallyClickModule', 'ngCookies', 'ngResource', 'pascalprecht.translate',
                                         'app.usersModule', 'app.loginModule']);
 mainModel.controller('MainCtrl', function ($scope, $http, $q, $location, $timeout, $window, domain) {
     $scope.url = domain;
@@ -10,7 +10,7 @@ mainModel.controller('MainCtrl', function ($scope, $http, $q, $location, $timeou
 mainModel.constant('domain','http://localhost:8080');
 
 mainModel.config(
-    [ '$routeProvider', '$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+    [ '$routeProvider', '$locationProvider', '$httpProvider', '$translateProvider', function($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
 
         $routeProvider.when('/', {
             templateUrl : 'app/home.html',
@@ -79,6 +79,14 @@ mainModel.config(
             };
         }
     );
+
+
+    $translateProvider.useSanitizeValueStrategy('escape');
+    $translateProvider.preferredLanguage('enUS');
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'app/general/languages/',
+        suffix: '.json'
+    });
 }]);
 
 mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {

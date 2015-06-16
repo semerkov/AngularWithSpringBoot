@@ -21,10 +21,12 @@ angular.module('ngReallyClickModule', ['ui.bootstrap'])
                 link: function(scope, element, attrs) {
                     element.bind('click', function() {
                         var message = attrs.ngReallyMessage || "Are you sure ?";
+                        var confirmMessage = attrs.ngReallyConfirm || "Yes";
+                        var cancelMessage = attrs.ngReallyCancel || "No";
 
                         var modalHtml = '<div class="modal-body"><h1>Warning</h1>' + message + '</div>';
-                        modalHtml += '<div class="modal-footer"><button class="btn btn-danger" ng-click="ok()">Yes</button>';
-                        modalHtml += '<button class="btn" ng-click="cancel()">No</button></div>';
+                        modalHtml += '<div class="modal-footer"><button class="btn btn-danger" ng-click="ok()">' + confirmMessage + '</button>';
+                        modalHtml += '<button class="btn" ng-click="cancel()">' + cancelMessage + '</button></div>';
 
                         var modalInstance = $modal.open({
                             template: modalHtml,

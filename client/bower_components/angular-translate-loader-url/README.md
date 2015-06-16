@@ -1,6 +1,6 @@
-# angular-translate (bower shadow repository)
+# angular-translate-loader-url (bower shadow repository)
 
-This is the _Bower shadow_ repository for *angular-translate*.
+This is the _Bower shadow_ repository for *angular-translate-loader-url*.
 
 ## Bugs and issues
 
@@ -11,12 +11,12 @@ Please file any issues and bugs in our main repository at [angular-translate/ang
 ### via Bower
 
 ```bash
-$ bower install angular-translate
+$ bower install angular-translate-loader-url
 ```
 
 ### via cdnjs
 
-Please have a look at https://cdnjs.com/libraries/angular-translate for specific versions.
+Please have a look at https://cdnjs.com/libraries/angular-translate-loader-url for specific versions.
 
 ## License
 

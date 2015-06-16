@@ -1,14 +1,14 @@
 <div>
     <div align="right">
-        <button class="btn btn-primary" ng-click="go('/user/register')">New user</button>
+        <button class="btn btn-primary" ng-click="go('/user/register')">{{'user.action.newuser' | translate}}</button>
     </div>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Login</th>
-                <th>Email</th>
+                <th>{{'user.name' | translate}}</th>
+                <th>{{'user.login' | translate}}</th>
+                <th>{{'user.email' | translate}}</th>
                 <th><span class="glyphicon glyphicon-pencil"/></th>
             </tr>
         </thead>
@@ -24,6 +24,10 @@
             ng-model="currentPage"
             total-items="totalElements"
             max-size="maxSize"
-            boundary-links="true">
+            boundary-links="true"
+            previous-text="{{'pagination.previous' | translate}}"
+            next-text="{{'pagination.next' | translate}}"
+            first-text="{{'pagination.first' | translate}}"
+            last-text="{{'pagination.last' | translate}}">
     </pagination>
 </div>
