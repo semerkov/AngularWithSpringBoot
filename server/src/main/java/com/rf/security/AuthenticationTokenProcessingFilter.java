@@ -1,6 +1,8 @@
 package com.rf.security;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -19,10 +21,13 @@ import org.springframework.web.filter.GenericFilterBean;
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
 	private final UserDetailsService userService;
+	// Change to Redis in the future
+	private final Map<String, UserDetails> userCache;
 
 
 	public AuthenticationTokenProcessingFilter(UserDetailsService userService) {
 		this.userService = userService;
+		userCache = new HashMap<String, UserDetails>();
 	}
 
 
@@ -35,8 +40,11 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 		String userName = TokenUtils.getUserNameFromToken(authToken);
 
 		if (userName != null) {
-
-			UserDetails userDetails = this.userService.loadUserByUsername(userName);
+			UserDetails userDetails = userCache.get(userName);
+			if (userDetails == null) {
+				userDetails = this.userService.loadUserByUsername(userName);
+				userCache.put(userName, userDetails);
+			}			 
 
 			if (TokenUtils.validateToken(authToken, userDetails)) {
 
