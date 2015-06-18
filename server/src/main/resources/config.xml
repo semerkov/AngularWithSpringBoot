@@ -15,6 +15,7 @@
 	<!-- SPRING SECURITY SETUP -->
 	
 	<bean id="userDetailService" class="com.rf.security.CustomUserDetailsService" />
+	<bean id="accessDeniedHandler" class="com.rf.security.CustomAccessDeniedHandler" />
 
 	<bean id="passwordEncoder"
 		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
@@ -36,6 +37,7 @@
 		<security:intercept-url method="PUT" pattern="/protected/**" access="hasRole('user')" />
 		<security:intercept-url method="POST" pattern="/protected/**" access="hasRole('user')" />
 		<security:intercept-url method="DELETE" pattern="/protected/**" access="hasRole('user')" />
+		<security:access-denied-handler ref="accessDeniedHandler" />
 	</security:http>
 
 	<bean id="unauthorizedEntryPoint" class="com.rf.security.UnauthorizedEntryPoint" />
