@@ -24,10 +24,13 @@ mainModel.config(
             templateUrl : 'app/users/view/userRegistration.html',
             controller  : 'UserRegistrationCtrl'
         })
-
         .when('/user', {
             templateUrl : 'app/users/view/usersList.html',
             controller  : 'UsersListCtrl'
+        })
+        .when('/profile', {
+            templateUrl : 'app/users/view/profile.html',
+            controller  : 'ProfileCtrl'
         })
         .when('/login', {
             templateUrl : 'app/login/login.html',
