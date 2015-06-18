@@ -10,8 +10,7 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
         promisse.then(function(result) {
             $scope.user = result;
         }, function(reason) {
-            addMessage(reason);
-            $scope.success = false;
+            clearAndAddMessage(reason, false);
         });
     }
     $scope.messages = [];
@@ -19,8 +18,13 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
 
     $scope.save = function(user) {
         if ($scope.form.$invalid) {
-            addMessage("Check the errors in the form")
+            clearAndAddMessage("Check the errors in the form", false);
+            return;
         }
+        if (validateUser(user) === false) {
+            return;
+        }
+
         var promisse = null;
         if (user.id == null) {
             promisse = UsersModuleResource.saveUser(user);
@@ -28,12 +32,10 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
             promisse = UsersModuleResource.updateUser(user);
         }
         promisse.then(function(result) {
-            addMessage(result.message);
-            $scope.success = true;
+            clearAndAddMessage(result.message, true);
             $scope.user = result.object;
         }, function(reason) {
-            addMessage(reason);
-            $scope.success = false;
+            clearAndAddMessage(reason.body.message, false);
         });
 
     };
@@ -41,21 +43,36 @@ userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal
     $scope.deleteUser = function() {
         var promisse = UsersModuleResource.deleteUser($scope.user.id);
         promisse.then(function(result) {
-            addMessage(result.message);
-            $scope.success = true;
+            clearAndAddMessage(result.message, true);
             $scope.user = {};
         }, function(reason) {
-            addMessage(reason);
-            $scope.success = false;
+            clearAndAddMessage(reason, false);
         });
     }
 
-    function addMessage(message) {
+    function clearAndAddMessage(message, success) {
         clearAllMessages();
+        addMessage(message, success);
+    }
+
+    function addMessage(message, success) {
         $scope.messages.push(message);
+        $scope.success = success;
     }
 
     function clearAllMessages() {
         $scope.messages = [];
+    }
+
+    function validateUser(user) {
+        clearAllMessages();
+        var valid = true;
+        if (user.id == null) {
+            if (user.password != user.passwordConfirmation) {
+                addMessage("The password and confirmation are different", false);
+                valid = false;
+            }
+        }
+        return valid;
     }
 }]);

@@ -64,10 +64,10 @@ public class UsersApi {
 	public Response putUser(@PathParam("userid") String userid, User user) {
 		try {
 			user.setId(Long.valueOf(userid));
-			User userSaved = userBusiness.saveUser(user);
+			User userSaved = userBusiness.updateUser(user);
 			return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "User updated!", userSaved)).build();
 		} catch (Exception e) {
-			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to update user")).build();
+			return Response.serverError().entity(new ApiResponseMessage(ApiResponseMessage.ERROR, "Failed to update user: " + e.getMessage())).build();
 		}
 	}
 

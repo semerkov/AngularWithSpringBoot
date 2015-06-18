@@ -8,12 +8,12 @@
             <div class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
                 <label for="name">{{'user.name' | translate}}:</label>
                 <input type="text" class="form-control" id="name" name="name" ng-model="user.name" placeholder="{{'user.name' | translate}}" required="true">
-                <p ng-show="form.name.$invalid && !form.name.$pristine" class="help-block">Name is required.</p>
+                <p ng-show="form.name.$invalid && !form.name.$pristine" class="help-block">{{'user.validation.name_required' | translate}}</p>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">
                 <label for="email">{{'user.email' | translate}}:</label>
                 <input type="email" class="form-control" id="email" name="email" ng-model="user.email" placeholder="user@email.com" required="true">
-                <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">Enter a valid email.</p>
+                <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">{{'user.validation.email_invalid' | translate}}</p>
             </div>
             <div class="form-group">
                 <label for="login">{{'user.login' | translate}}:</label>

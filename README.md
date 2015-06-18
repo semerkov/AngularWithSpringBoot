@@ -6,9 +6,11 @@ You can use this example (or boilerplate) to start a real application for produc
 - Lazy pagination of list
 - CRUD of user
 - Login screen and session control
-- Internationalization (en-US and pt-BR)
+- Angular Internationalization (en-US and pt-BR)
+- Server side Internationalization (Pending)
 - Bower for javascript dependencies
 - Maven for java dependencies
+- Grunt for client side build (Pending)
 
 # How to run
 - DB -

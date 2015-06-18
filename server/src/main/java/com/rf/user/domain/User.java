@@ -47,6 +47,14 @@ public class User implements UserDetails {
 		this.login = login;
 		this.password = passwordHash;
 	}
+	
+	public User(Long id, String name, String login, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.login = login;
+		this.email = email;
+	}
 
 	public User(Long id, String name, String login, String email, String passwordHash) {
 		super();

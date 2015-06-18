@@ -32,6 +32,10 @@
         },
         "title" : {
             "registration" : "Cadastro de usuário"
+        },
+        "validation" : {
+            "name_required" : "Nome é obrigatório.",
+            "email_invalid" : "Insira um email válido."
         }
     }
 }

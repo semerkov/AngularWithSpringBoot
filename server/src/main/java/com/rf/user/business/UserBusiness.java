@@ -1,5 +1,6 @@
 package com.rf.user.business;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,10 +24,22 @@ public class UserBusiness {
 		this.userRepository = userRepository;
 	}
 
-	public User saveUser(User user) {
-		return userRepository.save(user);
+	public User saveUser(User newUser) {
+		validateUser(newUser);
+		return userRepository.save(newUser);
 	}
-
+	
+	public User updateUser(User updatedUser) {
+		User oldUser = userRepository.findOne(updatedUser.getId());
+		oldUser.setEmail(updatedUser.getEmail());
+		oldUser.setLogin(updatedUser.getLogin());
+		oldUser.setName(updatedUser.getName());
+		
+		validateUser(oldUser);
+		
+		return userRepository.save(oldUser);
+	}
+	
 	public boolean existsUsers() {
 		int countResult = userRepository.countUsers();
 		return countResult > 0;
@@ -57,6 +70,33 @@ public class UserBusiness {
 			pageable = new PageRequest(page, pageSize, sort);
 		}
 		return userRepository.getPaginatedList(pageable);
+	}
+	
+	public void validateUser(User user) {
+		if (StringUtils.isEmpty(user.getName())) {
+			throw new IllegalStateException("Name can't be null");
+		}
+		if (StringUtils.isEmpty(user.getLogin())) {
+			throw new IllegalStateException("Login can't be null");
+		}
+		if (StringUtils.isEmpty(user.getPassword())) {
+			throw new IllegalStateException("Password can't be null");
+		}
+		if (StringUtils.isEmpty(user.getEmail())) {
+			throw new IllegalStateException("Email can't be null");
+		}
+		if (user.getId() == null) {
+			User userFound = userRepository.loadByLogin(user.getLogin());
+			if (userFound != null) {
+				throw new IllegalStateException("The login \"" + user.getLogin() + "\" has already been used");
+			}
+			
+			userFound = userRepository.loadByEmail(user.getEmail());
+			if (userFound != null) {
+				throw new IllegalStateException("The email \"" + user.getEmail() + "\" has already been used");
+			}
+			
+		}
 	}
 
 }

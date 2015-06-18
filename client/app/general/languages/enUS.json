@@ -32,6 +32,10 @@
         },
         "title" : {
             "registration" : "User registration"
+        },
+        "validation" : {
+            "name_required" : "Name is required.",
+            "email_invalid" : "Enter a valid email."
         }
     }
 }
