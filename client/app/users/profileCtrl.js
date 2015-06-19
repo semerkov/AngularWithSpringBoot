@@ -44,4 +44,8 @@ userModule.controller('ProfileCtrl', ['$scope', 'UsersModuleResource', function 
         $scope.messages = [];
     }
 
+    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+        event.preventDefault();//prevent file from uploading
+    });
+
 }]);

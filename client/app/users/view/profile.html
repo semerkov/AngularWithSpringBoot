@@ -1,14 +1,40 @@
 <div>
     <h1>{{'user.title.profile' | translate}}</h1>
-    <form name="form" class="css-form" novalidate>
-        <div class="form-group" ng-show="user.id == null">
-            <label for="password">{{'user.password' | translate}}:</label>
-            <input type="password" class="form-control" id="password" ng-model="user.password">
+    <div class="panel panel-default">
+        <div class="panel-heading">Photo upload</div>
+        <div class="panel-body">
+            <!-- Look at https://github.com/flowjs/ng-flow -->
+            <div flow-init="{target: '/upload'}"
+                 flow-files-submitted="$flow.upload()"
+                 flow-file-success="$file.msg = $message">
+
+                <input type="file" flow-btn/>
+                Input OR Other element as upload button
+                <span class="btn btn-primary" flow-btn>Upload File</span>
+
+                <table>
+                    <tr ng-repeat="file in $flow.files">
+                        <td>{{$index+1}}</td>
+                        <td>{{file.name}}</td>
+                        <td>{{file.msg}}</td>
+                    </tr>
+                </table>
+                <img flow-img="$flow.files[0]" />
+            </div>
         </div>
-        <div class="form-group" ng-show="user.id == null">
-            <label for="passwordConfirmation">{{'user.retype_password' | translate}}:</label>
-            <input type="password" class="form-control" id="passwordConfirmation" ng-model="user.passwordConfirmation">
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Password change</div>
+            <div class="panel-body">
+            <div class="form-group" ng-show="user.id == null">
+                <label for="password">{{'user.password' | translate}}:</label>
+                <input type="password" class="form-control" id="password" ng-model="user.password">
+            </div>
+            <div class="form-group" ng-show="user.id == null">
+                <label for="passwordConfirmation">{{'user.retype_password' | translate}}:</label>
+                <input type="password" class="form-control" id="passwordConfirmation" ng-model="user.passwordConfirmation">
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click="save(user)" ng-disabled="form.$invalid">{{'user.action.save' | translate}}</button>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="save(user)" ng-disabled="form.$invalid">{{'user.action.save' | translate}}</button>
-    </form>
+    </div>
 </div>
