@@ -1,5 +1,7 @@
 package com.rf.user.business;
 
+import java.util.HashSet;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,11 @@ public class UserBusiness {
 	}
 
 	public User saveUser(User newUser) {
+		if (newUser.getRoles() == null) {
+			newUser.setRoles(new HashSet<String>());
+		}
+		newUser.getRoles().add("user");
+		
 		validateUser(newUser);
 		return userRepository.save(newUser);
 	}
