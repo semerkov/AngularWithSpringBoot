@@ -8,12 +8,16 @@
             <div class="form-group" ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }">
                 <label for="name">{{'user.name' | translate}}:</label>
                 <input type="text" class="form-control" id="name" name="name" ng-model="user.name" placeholder="{{'user.name' | translate}}" required="true">
-                <p ng-show="form.name.$invalid && !form.name.$pristine" class="help-block">{{'user.validation.name_required' | translate}}</p>
+                <ng-messages for="form.name.$error" ng-hide="form.name.$pristine" class="help-block">
+                    <ng-message when="required">{{'user.validation.name_required' | translate}}</ng-message>
+                </ng-messages>
             </div>
             <div class="form-group" ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }">
                 <label for="email">{{'user.email' | translate}}:</label>
                 <input type="email" class="form-control" id="email" name="email" ng-model="user.email" placeholder="user@email.com" required="true">
-                <p ng-show="form.email.$invalid && !form.email.$pristine" class="help-block">{{'user.validation.email_invalid' | translate}}</p>
+                <ng-messages for="form.email.$error" ng-hide="form.email.$pristine" class="help-block">
+                    <ng-message when="email">{{'user.validation.email_invalid' | translate}}</ng-message>
+                </ng-messages>
             </div>
             <div class="form-group">
                 <label for="login">{{'user.login' | translate}}:</label>
