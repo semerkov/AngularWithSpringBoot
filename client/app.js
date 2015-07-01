@@ -1,6 +1,6 @@
 'use strict';
 
-var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngReallyClickModule', 'ngCookies', 'ngResource', 'pascalprecht.translate',
+var mainModel = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngReallyClickModule', 'ngCookies', 'ngResource', 'pascalprecht.translate', 'flow',
                                         'app.usersModule', 'app.loginModule']);
 mainModel.controller('MainCtrl', function ($scope, $http, $q, $location, $timeout, $window, domain) {
     $scope.url = domain;

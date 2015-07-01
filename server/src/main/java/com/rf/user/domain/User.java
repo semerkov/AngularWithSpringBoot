@@ -167,4 +167,9 @@ public class User implements UserDetails {
 	public String getUsername() {
 		return login;
 	}
+
+	public String getFirstName() {
+		String[] names = getName().split("\\s");
+		return names[0];
+	}
 }

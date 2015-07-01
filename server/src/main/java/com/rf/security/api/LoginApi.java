@@ -1,8 +1,5 @@
 package com.rf.security.api;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,15 +13,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import com.rf.security.TokenUtils;
-import com.rf.user.domain.transfer.TokenTransfer;
-import com.rf.user.domain.transfer.UserTransfer;
+import com.rf.security.model.TokenTransfer;
 
 @Component
 @Path("/login")
@@ -44,7 +39,7 @@ public class LoginApi {
 	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserTransfer getUser() {
+	public UserDetails getUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = authentication.getPrincipal();
 		if (principal instanceof String && ((String) principal).equals("anonymousUser")) {
@@ -52,7 +47,7 @@ public class LoginApi {
 		}
 		UserDetails userDetails = (UserDetails) principal;
 
-		return new UserTransfer(userDetails.getUsername(), this.createRoleMap(userDetails));
+		return userDetails;
 	}
 
 	/**
@@ -72,21 +67,9 @@ public class LoginApi {
 		Authentication authentication = this.authManager.authenticate(authenticationToken);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		/*
-		 * Reload user as password of authentication principal will be null
-		 * after authorization and password is needed for token generation
-		 */
 		UserDetails userDetails = this.userService.loadUserByUsername(username);
 
 		return new TokenTransfer(TokenUtils.createToken(userDetails));
 	}
 
-	private Map<String, Boolean> createRoleMap(UserDetails userDetails) {
-		Map<String, Boolean> roles = new HashMap<String, Boolean>();
-		for (GrantedAuthority authority : userDetails.getAuthorities()) {
-			roles.put(authority.getAuthority(), Boolean.TRUE);
-		}
-
-		return roles;
-	}
 }
