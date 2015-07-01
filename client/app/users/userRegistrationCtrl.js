@@ -1,7 +1,6 @@
 var userModule = angular.module('app.usersModule');
 
 userModule.controller('UserRegistrationCtrl', ['$scope', '$routeParams', '$modal', 'UsersModuleResource', function ($scope, $routeParams, $modal, UsersModuleResource) {
-    UsersModuleResource = new UsersModuleResource();
     var userid = $routeParams.userid;
     if (userid === undefined) {
         $scope.user = {};
