@@ -76,7 +76,7 @@ angular.module('app.loginModule').factory('LoginService', function($q, $http, $r
             return deferred.promise;
         };
 
-        return LoginService;
+        return new LoginService();
     })();
 
     return LoginService;

@@ -305,7 +305,7 @@ module.factory('UsersModuleResource', ['$q', '$http', '$rootScope', 'domain', fu
                 return deferred.promise;
             };
 
-            return UsersModuleResource;
+            return new UsersModuleResource();
         })();
 
         return UsersModuleResource;

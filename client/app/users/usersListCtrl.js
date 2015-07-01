@@ -6,11 +6,9 @@ userModule.controller('UsersListCtrl', ['$scope', '$location', 'UsersModuleResou
     $scope.maxSize = 5;
     $scope.totalElements = 0;
 
-    usersModuleResource = new UsersModuleResource();
-
     $scope.loadPagesOfUser = function() {
         var parameters = {"$size": $scope.numPerPage, "$sort": "", "$page": $scope.currentPage - 1};
-        var promisse = usersModuleResource.getUserList(parameters);
+        var promisse = UsersModuleResource.getUserList(parameters);
         promisse.then(function(result) {
             $scope.users = result.content;
             $scope.totalElements = result.totalElements;

@@ -1,7 +1,6 @@
 var userModule = angular.module('app.usersModule');
 
 userModule.controller('ProfileCtrl', ['$scope', 'UsersModuleResource', function ($scope, UsersModuleResource) {
-    UsersModuleResource = new UsersModuleResource();
     //$scope.user =
     $scope.messages = [];
     $scope.success = true;

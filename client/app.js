@@ -93,7 +93,6 @@ mainModel.config(
 }]);
 
 mainModel.run(function($rootScope, $location, $cookieStore, LoginService) {
-    LoginService = new LoginService();
     $rootScope.$on('$viewContentLoaded', function() {
         delete $rootScope.error;
     });
