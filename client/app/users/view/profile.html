@@ -3,24 +3,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">Photo upload</div>
         <div class="panel-body">
-            <!-- Look at https://github.com/flowjs/ng-flow -->
-            <div flow-init="{target: '/upload'}"
-                 flow-files-submitted="$flow.upload()"
-                 flow-file-success="$file.msg = $message">
-
-                <input type="file" flow-btn/>
-                Input OR Other element as upload button
-                <span class="btn btn-primary" flow-btn>Upload File</span>
-
-                <table>
-                    <tr ng-repeat="file in $flow.files">
-                        <td>{{$index+1}}</td>
-                        <td>{{file.name}}</td>
-                        <td>{{file.msg}}</td>
-                    </tr>
-                </table>
-                <img flow-img="$flow.files[0]" />
-            </div>
+            <!-- Look at https://github.com/danialfarid/ng-file-upload -->
+            <img ngf-src="files[0]" ngf-default-src="'/thumb.jpg'" ngf-accept="'image/*'" width="75px" height="75px">
+            <div class="btn btn-primary" ngf-select ng-model="files">Upload image</div>
         </div>
     </div>
     <div class="panel panel-default">

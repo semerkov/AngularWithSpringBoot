@@ -1,50 +1,28 @@
 var userModule = angular.module('app.usersModule');
 
-userModule.controller('ProfileCtrl', ['$scope', 'UsersModuleResource', function ($scope, UsersModuleResource) {
-    //$scope.user =
-    $scope.messages = [];
-    $scope.success = true;
-
-    $scope.save = function(user) {
-        if ($scope.form.$invalid) {
-            clearAndAddMessage("Check the errors in the form", false);
-            return;
-        }
-        if (validateUser(user) === false) {
-            return;
-        }
-
-        var promisse = null;
-        if (user.id == null) {
-            promisse = UsersModuleResource.saveUser(user);
-        } else {
-            promisse = UsersModuleResource.updateUser(user);
-        }
-        promisse.then(function(result) {
-            clearAndAddMessage(result.message, true);
-            $scope.user = result.object;
-        }, function(reason) {
-            clearAndAddMessage(reason.body.message, false);
-        });
-
-    };
-
-    function clearAndAddMessage(message, success) {
-        clearAllMessages();
-        addMessage(message, success);
-    }
-
-    function addMessage(message, success) {
-        $scope.messages.push(message);
-        $scope.success = success;
-    }
-
-    function clearAllMessages() {
-        $scope.messages = [];
-    }
-
-    $scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
-        event.preventDefault();//prevent file from uploading
+userModule.controller('ProfileCtrl', ['$scope', 'UsersModuleResource', 'Upload', 'domain', function ($scope, UsersModuleResource, Upload, domain) {
+    $scope.$watch('files', function () {
+        $scope.upload($scope.files);
     });
+
+    $scope.upload = function (files) {
+        var path = '/protected/profile/uploadImage';
+        var url = domain + path;
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                Upload.upload({
+                    url: url,
+                    fields: {'username': $scope.username},
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                });
+            }
+        }
+    };
 
 }]);
